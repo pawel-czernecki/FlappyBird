@@ -37,6 +37,13 @@ setInterval(()=>{
     birdY+=gravity;
 }, 15);
 
+function gameOver(){
+    ctx.font = "40px Arial";
+    ctx.textAlign = "center";
+    ctx.fillStyle = "white";
+    ctx.fillText("Twój wynik: "+score, 150, 150)
+}
+
 function draw(){
 
     ctx.drawImage(bg,0,0);
@@ -59,13 +66,17 @@ function draw(){
         if(pipes[i].x==2){
             score++;
         }
-        
+
+        if((birdY-5<=topPipe.height+pipes[i].y || birdY+bird.height-5>=topPipe.height+pipes[i].y+gap)&&(birdX+bird.width-5>=pipes[i].x&& birdX-5<=pipes[i].x+topPipe.width))
+            {
+                location.reload();
+            }
     }
 
     ctx.font = "40px Arial";
     ctx.textAlign = "center";
     ctx.fillStyle = "white";
-    ctx.fillText(score, 150, 50, 20)
+    ctx.fillText(score, 150, 70)
     
     requestAnimationFrame(draw)
 }
